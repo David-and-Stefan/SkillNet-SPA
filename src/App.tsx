@@ -5,8 +5,9 @@ import { ThemeProvider } from './contexts/ThemeProvider';
 function App() {
   return (
     <ThemeProvider>
-      <main className="w-screen text-black">
+      <main className="w-screen text-black dark:text-dark-300">
         <Sidebar />
+
         <Routes>
           {/* <Route path={RoutePage.HOME} element={<Home />} /> */}
         </Routes>
