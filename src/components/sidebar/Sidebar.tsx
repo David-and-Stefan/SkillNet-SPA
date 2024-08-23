@@ -14,10 +14,13 @@ import {
   Users,
 } from 'lucide-react';
 import { PropsWithChildren, useState } from 'react';
+import { useThemeContext } from '../../contexts/ThemeProvider';
+import { Theme } from '../../types';
 import SidebarItem from './sidebar-item/SidebarItem';
 
 function Sidebar({ children }: PropsWithChildren) {
   const [expanded, setExpanded] = useState<boolean>(true);
+  const { theme, setTheme } = useThemeContext();
 
   return (
     <aside className="h-screen w-fit">
@@ -39,8 +42,20 @@ function Sidebar({ children }: PropsWithChildren) {
           </div>
 
           <div className="px-3 py-2 border-t">
-            <SidebarItem icon={<Moon size={20} />} text="Dark Theme" />
-            <SidebarItem icon={<Sun size={20} />} text="Light Theme" />
+            {theme === Theme.DARK && (
+              <SidebarItem
+                icon={<Sun size={20} />}
+                text="Light Theme"
+                onClick={() => setTheme(Theme.LIGHT)}
+              />
+            )}
+            {theme === Theme.LIGHT && (
+              <SidebarItem
+                icon={<Moon size={20} />}
+                text="Dark Theme"
+                onClick={() => setTheme(Theme.DARK)}
+              />
+            )}
             <SidebarItem icon={<Activity size={20} />} text="Activity" />
             <SidebarItem icon={<CircleCheck size={20} />} text="Tasks" />
             <ul className="flex-1 pt-2">
