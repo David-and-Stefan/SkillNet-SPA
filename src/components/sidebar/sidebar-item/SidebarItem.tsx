@@ -43,7 +43,7 @@ function SidebarItem({ icon, text, active, alert, onClick }: SidebarItemProps) {
 
       {!expanded && (
         <div
-          className={`
+          className={`z-50
           absolute left-full rounded-md px-2 py-1 ml-6
           bg-indigo-100 text-indigo-800 text-sm
           dark:bg-dark-700 dark:text-dark-300
