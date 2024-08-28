@@ -14,7 +14,7 @@ const THEME_STORAGE_KEY = 'theme';
 export function ThemeProvider({ children }: PropsWithChildren) {
   const { value: theme, setStorageData: setTheme } = useLocalStorage<Theme>(
     THEME_STORAGE_KEY,
-    Theme.LIGHT
+    Theme.DARK
   );
 
   useEffect(() => {
