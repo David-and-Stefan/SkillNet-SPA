@@ -7,7 +7,7 @@ function SidebarLogic({ children }: PropsWithChildren) {
   const [expanded, setExpanded] = useState<boolean>(true);
 
   return (
-    <aside className="h-screen w-fit">
+    <aside className="h-screen w-fit sticky top-0">
       <nav className="h-full flex flex-col justify-between bg-white dark:bg-dark-950 border-r dark:border-r-dark-800 shadow-sm">
         <div>
           <div className="p-4 flex justify-between items-center">
