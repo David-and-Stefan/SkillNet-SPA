@@ -33,7 +33,7 @@ function OrganisationContentPost() {
         />
       </div>
 
-      <div className="flex items-center px-5 text-sm justify-between font-bold border-t border-indigo-200 dark:border-dark-600 py-4 text-indigo-800 dark:text-dark-200">
+      <div className="flex items-center px-5 text-sm justify-between font-semibold border-t border-indigo-200 dark:border-dark-600 py-4 text-indigo-800 dark:text-dark-200">
         <button className="h-full px-4 py-2 rounded-lg bg-gradient-to-tr from-indigo-200 to-indigo-100 dark:from-dark-700 dark:to-dark-600">
           Category
         </button>
