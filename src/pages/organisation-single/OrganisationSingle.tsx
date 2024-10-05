@@ -1,8 +1,12 @@
+import { usePageInfoContext } from '../../contexts/PageInfoContext';
 import OrganisationContent from './components/organisation-content/OrganisationContent';
 import OrganisationHeader from './components/organisation-header/OrganisationHeader';
 import OrganisationSidebar from './components/organisation-sidebar/OrganisationSidebar';
 
-function Organisation() {
+function OrganisationSingle() {
+  const { setPageInfo, getCurrentPagePath } = usePageInfoContext();
+  setPageInfo('Single Organisation', [getCurrentPagePath('Breadcrumb Name')]);
+
   return (
     <section className="text-gray-600 dark:text-white">
       {/* Header Section */}
@@ -19,4 +23,4 @@ function Organisation() {
   );
 }
 
-export default Organisation;
+export default OrganisationSingle;

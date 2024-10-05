@@ -10,7 +10,7 @@ import {
   Sun,
   Users,
 } from 'lucide-react';
-import { useThemeContext } from '../../contexts/ThemeProvider';
+import { useThemeContext } from '../../contexts/ThemeContext';
 import { Theme } from '../../types';
 import SidebarItem from './sidebar-item/SidebarItem';
 import SidebarLogic from './sidebar-logic/SidebarLogic';

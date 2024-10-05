@@ -4,7 +4,7 @@ import OrganisationHeaderStat from './organisation-header-stat/OrganisationHeade
 
 function OrganisationHeader() {
   return (
-    <div className="relative p-4 bg-white dark:bg-dark-950 rounded-2xl">
+    <div className="relative p-4 bg-white dark:bg-dark-950 rounded-lg">
       <div className="bottom-4 left-4">
         <div className="flex flex-row justify-between">
           <div className="ml-4">
