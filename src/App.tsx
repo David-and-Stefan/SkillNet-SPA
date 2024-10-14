@@ -21,22 +21,34 @@ export const router = createBrowserRouter(
       }}>
       <Route
         path={RoutePage.ORGANISATION_SEARCH}
-        element={<OrganisationSearch />}
         handle={{
           crumb: () => 'Organisations',
         }}
         children={
-          <Route
-            path={RoutePage.ORGANISATION_SINGLE}
-            element={<OrganisationSingle />}
-            loader={async (data) => data.params.orgId}
-            handle={{
-              crumb: (organisationId: string) => (
-                <span>Single - {organisationId} </span>
-              ),
-            }}
-          />
+          <>
+            <Route index element={<OrganisationSearch />} />
+            <Route
+              path={RoutePage.ORGANISATION_SINGLE}
+              element={<OrganisationSingle />}
+              loader={async (data) => data.params.orgId}
+              handle={{
+                crumb: (organisationId: string) => (
+                  <span>Single - {organisationId} </span>
+                ),
+              }}
+            />
+          </>
         }
+      />
+      <Route
+        path={RoutePage.ORGANISATION_SINGLE}
+        element={<OrganisationSingle />}
+        loader={async (data) => data.params.orgId}
+        handle={{
+          crumb: (organisationId: string) => (
+            <span>Single - {organisationId} </span>
+          ),
+        }}
       />
     </Route>
   )

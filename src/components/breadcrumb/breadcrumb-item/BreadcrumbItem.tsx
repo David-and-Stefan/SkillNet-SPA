@@ -12,7 +12,7 @@ function BreadcrumbItem(props: BreadcrumbItemProps) {
   let liClasses = 'flex items-center';
   if (props.isCurrentPage) {
     liClasses +=
-      ' text-sm font-semibold text-gray-800 truncate dark:text-neutral-200';
+      ' text-sm font-semibold text-indigo-800 truncate dark:text-dark-200';
   }
 
   return (
@@ -20,13 +20,13 @@ function BreadcrumbItem(props: BreadcrumbItemProps) {
       {!props.isCurrentPage ? (
         <>
           <Link
-            className="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:text-neutral-500 dark:hover:text-blue-500 dark:focus:text-blue-500"
+            className="flex items-center text-sm text-indigo-500 hover:text-indigo-800 focus:outline-none focus:text-indigo-800 dark:text-neutral-500 dark:hover:text-dark-200 dark:focus:text-dark-200"
             aria-current="page"
             to={props.pathname}>
             {props.crumb}
           </Link>
           <svg
-            className="shrink-0 size-5 text-gray-400 dark:text-neutral-600 mx-2"
+            className="shrink-0 size-5 text-gray-600 dark:text-neutral-600 mx-2"
             width="16"
             height="16"
             viewBox="0 0 16 16"
