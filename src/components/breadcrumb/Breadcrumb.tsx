@@ -1,13 +1,50 @@
-import { usePageInfoContext } from '../../contexts/PageInfoContext';
+import { Params, useMatches } from 'react-router-dom';
 
-interface BreadcrumbProps {}
+interface IMatches {
+  id: string;
+  pathname: string;
+  params: Params<string>;
+  data: unknown;
+  handle: unknown;
+}
+
+type HandleType = {
+  crumb: (param?: string) => React.ReactNode;
+};
 
 function Breadcrumb() {
-  const { pagePaths } = usePageInfoContext();
+  const matches: IMatches[] = useMatches();
+
+  const crumbs = matches
+    .filter((match) =>
+      Boolean(match.handle && (match.handle as HandleType).crumb)
+    )
+    .map((match) => {
+      console.log(match);
+
+      const crumb = (match.handle as HandleType).crumb(
+        match.data as string | undefined
+      );
+
+      return crumb as React.ReactNode;
+    });
+
+  console.log(crumbs);
 
   return (
     <ol className="flex items-center whitespace-nowrap absolute top-0">
-      <li className="inline-flex items-center">
+      {crumbs.map((crumb, index) => (
+        <li key={index}>{crumb}</li>
+      ))}
+      {/* {pagePaths.map((x, i, arr) => (
+        <BreadcrumbItem
+          key={`${x.path}${x.breadcrumbName}`}
+          pagePath={x}
+          isCurrentPage={i === arr.length - 1}
+          isOne={arr.length === 1}
+        />
+      ))} */}
+      {/* <li className="inline-flex items-center">
         <a
           className="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:text-neutral-500 dark:hover:text-blue-500 dark:focus:text-blue-500"
           href="#">
@@ -51,7 +88,7 @@ function Breadcrumb() {
         className="inline-flex items-center text-sm font-semibold text-gray-800 truncate dark:text-neutral-200"
         aria-current="page">
         Application
-      </li>
+      </li> */}
     </ol>
   );
 }
