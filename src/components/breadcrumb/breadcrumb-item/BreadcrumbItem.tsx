@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom';
 import { Fragment } from 'react/jsx-runtime';
 
 interface BreadcrumbItemProps {
+  crumb: React.ReactNode;
+  pathname: string;
   isCurrentPage: boolean;
   isOne: boolean;
 }
@@ -16,12 +19,12 @@ function BreadcrumbItem(props: BreadcrumbItemProps) {
     <li className={liClasses}>
       {!props.isCurrentPage ? (
         <>
-          {/* <Link
+          <Link
             className="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:text-neutral-500 dark:hover:text-blue-500 dark:focus:text-blue-500"
             aria-current="page"
-            to={props.pagePath.path}>
-            {props.pagePath.breadcrumbName}
-          </Link> */}
+            to={props.pathname}>
+            {props.crumb}
+          </Link>
           <svg
             className="shrink-0 size-5 text-gray-400 dark:text-neutral-600 mx-2"
             width="16"
@@ -33,11 +36,11 @@ function BreadcrumbItem(props: BreadcrumbItemProps) {
             <path
               d="M6 13L10 3"
               stroke="currentColor"
-              stroke-linecap="round"></path>
+              strokeLinecap="round"></path>
           </svg>
         </>
       ) : (
-        <Fragment>Dsas</Fragment>
+        <Fragment>{props.crumb}</Fragment>
       )}
     </li>
   );
