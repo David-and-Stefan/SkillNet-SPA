@@ -15,12 +15,17 @@ import { Theme } from '../../types';
 import SidebarItem from './sidebar-item/SidebarItem';
 import SidebarLogic from './sidebar-logic/SidebarLogic';
 import SidebarText from './sidebar-text/SidebarText';
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 function Sidebar() {
   const { theme, setTheme } = useThemeContext();
+  
+  const {user, isAuthenticated, loginWithRedirect, logout} = useAuth0();
 
   return (
     <SidebarLogic>
+      <button onClick={() => loginWithRedirect()}>Login AHH</button>
       {theme === Theme.DARK && (
         <SidebarItem
           icon={<Sun size={20} />}
