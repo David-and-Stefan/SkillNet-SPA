@@ -11,7 +11,7 @@ import OrganisationSearch from './pages/organisation-search/OrganisationSearch';
 import OrganisationSingle from './pages/organisation-single/OrganisationSingle';
 import { RoutePage } from './types';
 import { getConfig } from './config'
-import { Auth0Provider } from "@auth0/auth0-react";
+import { Auth0Provider, Auth0ProviderOptions } from "@auth0/auth0-react";
 import {createBrowserHistory} from "history";
 
 const config = getConfig();
@@ -26,8 +26,11 @@ const providerConfig: Auth0ProviderOptions = {
   domain: config.domain,
   clientId: config.clientId,
   onRedirectCallback,
+  cacheLocation: "localstorage",
   authorizationParams: {
-    redirect_uri: window.location.origin
+    redirect_uri: window.location.origin,
+    audience: "https://localhost:7091",
+    scope: "openid profile email skillnet-default"
   }
   
 };
