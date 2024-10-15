@@ -1,7 +1,6 @@
 import {
   createBrowserRouter,
   createRoutesFromChildren,
-  Link,
   Outlet,
   Route,
 } from 'react-router-dom';
@@ -41,20 +40,37 @@ export const router = createBrowserRouter(
       path={RoutePage.HOME}
       element={<App />}
       handle={{
-        crumb: () => <Link to={RoutePage.HOME}>Home</Link>,
+        crumb: () => 'Home',
       }}>
       <Route
         path={RoutePage.ORGANISATION_SEARCH}
-        element={<OrganisationSearch />}
         handle={{
-          crumb: (data: any) => <span>Maika ti</span>,
+          crumb: () => 'Organisations',
         }}
+        children={
+          <>
+            <Route index element={<OrganisationSearch />} />
+            <Route
+              path={RoutePage.ORGANISATION_SINGLE}
+              element={<OrganisationSingle />}
+              loader={async (data) => data.params.orgId}
+              handle={{
+                crumb: (organisationId: string) => (
+                  <span>Single - {organisationId} </span>
+                ),
+              }}
+            />
+          </>
+        }
       />
       <Route
         path={RoutePage.ORGANISATION_SINGLE}
         element={<OrganisationSingle />}
+        loader={async (data) => data.params.orgId}
         handle={{
-          crumb: (data: any) => <span>{data.threadName}</span>,
+          crumb: (organisationId: string) => (
+            <span>Single - {organisationId} </span>
+          ),
         }}
       />
     </Route>
