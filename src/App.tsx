@@ -4,38 +4,13 @@ import {
   Outlet,
   Route,
 } from 'react-router-dom';
+import Auth0Provider from './components/auth-provider/Auth0Provider';
 import Breadcrumb from './components/breadcrumb/Breadcrumb';
 import Sidebar from './components/sidebar/Sidebar';
 import { ThemeProvider } from './contexts/ThemeContext';
 import OrganisationSearch from './pages/organisation-search/OrganisationSearch';
 import OrganisationSingle from './pages/organisation-single/OrganisationSingle';
 import { RoutePage } from './types';
-import { getConfig } from './config'
-import { Auth0Provider, Auth0ProviderOptions } from "@auth0/auth0-react";
-import {createBrowserHistory} from "history";
-
-const config = getConfig();
-
-const onRedirectCallback = (appState: any) => {
-  createBrowserHistory().push(
-    appState && appState.returnTo ? appState.returnTo : window.location.pathname
-  );
-};
-
-const providerConfig: Auth0ProviderOptions = {
-  domain: config.domain,
-  clientId: config.clientId,
-  onRedirectCallback,
-  cacheLocation: "localstorage",
-  authorizationParams: {
-    redirect_uri: window.location.origin,
-    audience: "https://localhost:7091",
-    scope: "openid profile email skillnet-default"
-  }
-  
-};
-
-
 
 export const router = createBrowserRouter(
   createRoutesFromChildren(
@@ -82,8 +57,7 @@ export const router = createBrowserRouter(
 
 function App() {
   return (
-    <Auth0Provider {...providerConfig}>
-
+    <Auth0Provider>
       <ThemeProvider>
         <main className="w-screen text-black dark:text-dark-300 flex justify-center align-middle bg-dark-100 dark:bg-black">
           <Sidebar />
@@ -93,6 +67,6 @@ function App() {
           </div>
         </main>
       </ThemeProvider>
-      </Auth0Provider>
+    </Auth0Provider>
   );
 }
