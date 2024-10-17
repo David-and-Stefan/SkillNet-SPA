@@ -1,9 +1,12 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import {
   Activity,
   Calendar,
   ChartPie,
   CircleCheck,
+  Key,
   LayoutDashboard,
+  LogOut,
   MessageCircle,
   Moon,
   Settings2,
@@ -15,33 +18,50 @@ import { Theme } from '../../types';
 import SidebarItem from './sidebar-item/SidebarItem';
 import SidebarLogic from './sidebar-logic/SidebarLogic';
 import SidebarText from './sidebar-text/SidebarText';
-import { useAuth0 } from "@auth0/auth0-react";
-
 
 function Sidebar() {
   const { theme, setTheme } = useThemeContext();
-  
-  const {user, isAuthenticated, loginWithRedirect, logout} = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   return (
     <SidebarLogic>
-      <button onClick={() => loginWithRedirect()}>Login AHH</button>
-      {theme === Theme.DARK && (
-        <SidebarItem
-          icon={<Sun size={20} />}
-          text="Light Theme"
-          onClick={() => setTheme(Theme.LIGHT)}
-        />
-      )}
-      {theme === Theme.LIGHT && (
-        <SidebarItem
-          icon={<Moon size={20} />}
-          text="Dark Theme"
-          onClick={() => setTheme(Theme.DARK)}
-        />
-      )}
-      <SidebarItem icon={<Activity size={20} />} text="Activity" />
-      <SidebarItem icon={<CircleCheck size={20} />} text="Tasks" />
+      <ul className="flex-1 pt-2">
+        <SidebarText text="Auth" />
+        {!isAuthenticated ? (
+          <SidebarItem
+            icon={<Key size={20} />}
+            text="Login"
+            onClick={() => loginWithRedirect()}
+          />
+        ) : (
+          <SidebarItem
+            icon={<LogOut size={20} />}
+            text="Logout"
+            onClick={() => logout()}
+            alert
+          />
+        )}
+      </ul>
+      <ul className="flex-1 pt-2">
+        <SidebarText text="General" />
+        {theme === Theme.DARK && (
+          <SidebarItem
+            icon={<Sun size={20} />}
+            text="Light Theme"
+            onClick={() => setTheme(Theme.LIGHT)}
+          />
+        )}
+        {theme === Theme.LIGHT && (
+          <SidebarItem
+            icon={<Moon size={20} />}
+            text="Dark Theme"
+            onClick={() => setTheme(Theme.DARK)}
+          />
+        )}
+
+        <SidebarItem icon={<Activity size={20} />} text="Activity" />
+        <SidebarItem icon={<CircleCheck size={20} />} text="Tasks" />
+      </ul>
       <ul className="flex-1 pt-2">
         <SidebarText text="Menu" />
         <SidebarItem icon={<ChartPie size={20} />} text="Overview" active />
