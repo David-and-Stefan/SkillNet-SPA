@@ -9,7 +9,7 @@ function OrganisationHeader() {
         <div className="flex flex-row justify-between">
           <div className="ml-4">
             <h1 className="text-2xl font-bold">Test organisation</h1>
-            <p className="text-indigo-400 dark:text-dark-300">
+            <p className="text-indigo-800 dark:text-dark-300">
               ALL MEMBERS WELCOME!
             </p>
           </div>

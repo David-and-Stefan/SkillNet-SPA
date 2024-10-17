@@ -1,9 +1,10 @@
 import { Search } from 'lucide-react';
+import OrganisationSearchCard from './components/organisation-search-card/OrganisationSearchCard';
 
 function OrganisationSearch() {
   return (
-    <section className="relative p-4 bg-white dark:bg-dark-950 rounded-lg">
-      <div className="flex flex-row justify-between">
+    <section className="relative p-4">
+      <div className="flex flex-row justify-between bg-white dark:bg-dark-950 rounded-lg">
         <div className="flex justify-between items-center w-full">
           <div className="ml-4 py-4 relative flex justify-center">
             <input
@@ -16,12 +17,19 @@ function OrganisationSearch() {
             </button>
           </div>
 
-          <div className="flex text-white">
+          {/* <div className="flex text-white">
             <p>Sort By</p>
             <p>Alphabetical</p>
-          </div>
+          </div> */}
         </div>
-        <div className="flex space-x-8"></div>
+      </div>
+      <div className="pt-4">
+        <div className="flex items-center flex-wrap justify-between gap-5">
+          <OrganisationSearchCard />
+          <OrganisationSearchCard />
+          <OrganisationSearchCard />
+          <OrganisationSearchCard />
+        </div>
       </div>
     </section>
   );
