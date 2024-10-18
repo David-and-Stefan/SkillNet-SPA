@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import Auth0Provider from './components/auth-provider/Auth0Provider';
 import Breadcrumb from './components/breadcrumb/Breadcrumb';
+import QueryClientProvider from './components/query-client-provider/QueryClientProvider';
 import Sidebar from './components/sidebar/Sidebar';
 import { ThemeProvider } from './contexts/ThemeContext';
 import OrganisationSearch from './pages/organisation-search/OrganisationSearch';
@@ -57,16 +58,18 @@ export const router = createBrowserRouter(
 
 function App() {
   return (
-    <Auth0Provider>
-      <ThemeProvider>
-        <main className="w-screen text-black dark:text-dark-300 flex justify-center align-middle bg-dark-100 dark:bg-black">
-          <Sidebar />
-          <div className="flex-1 p-10 relative mt-3">
-            <Breadcrumb />
-            <Outlet />
-          </div>
-        </main>
-      </ThemeProvider>
-    </Auth0Provider>
+    <QueryClientProvider>
+      <Auth0Provider>
+        <ThemeProvider>
+          <main className="w-screen text-black dark:text-dark-300 flex justify-center align-middle bg-dark-100 dark:bg-black">
+            <Sidebar />
+            <div className="flex-1 p-10 relative mt-3">
+              <Breadcrumb />
+              <Outlet />
+            </div>
+          </main>
+        </ThemeProvider>
+      </Auth0Provider>
+    </QueryClientProvider>
   );
 }
