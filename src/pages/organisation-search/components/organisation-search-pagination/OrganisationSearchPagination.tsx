@@ -5,30 +5,28 @@ import OrganisationSearchPaginationButton, {
 } from './organisation-search-pagination-button/OrganisationSearchPaginationButton';
 
 interface OrganisationSearchPaginationProps {
-  onClickPreviousPage: () => any;
-  onClickNextPage: () => any;
   onClickNavigatePage: (page: number) => any;
   currentPage: number;
   pageSize: number;
   resultCount: number;
+  pageCount: number;
 }
 
 function OrganisationSearchPagination(
   props: OrganisationSearchPaginationProps
 ) {
-  const pageCount = Math.ceil(props.resultCount / props.pageSize);
-  console.log(pageCount);
+  // TODO: Handle the '...' button (figure start and end index around the button)
 
   return (
     <div className="flex items-center justify-between text-gray-600 dark:text-white bg-white p-5 dark:bg-dark-950 px-4 py-3 sm:px-6 rounded-lg">
       <div className="flex flex-1 justify-between sm:hidden">
         <a
-          onClick={props.onClickPreviousPage}
+          onClick={props.onClickNavigatePage.bind(null, props.currentPage - 1)}
           className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
           Previous
         </a>
         <a
-          onClick={props.onClickNextPage}
+          onClick={props.onClickNavigatePage.bind(null, props.currentPage + 1)}
           className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
           Next
         </a>
@@ -42,7 +40,9 @@ function OrganisationSearchPagination(
             </span>{' '}
             to{' '}
             <span className="font-medium">
-              {(props.currentPage + 1) * props.pageSize}
+              {props.currentPage === props.pageCount - 1
+                ? props.resultCount
+                : (props.currentPage + 1) * props.pageSize}
             </span>{' '}
             of <span className="font-medium">{props.resultCount}</span> results
           </p>
@@ -52,14 +52,19 @@ function OrganisationSearchPagination(
             aria-label="Pagination"
             className="isolate inline-flex -space-x-px rounded-md shadow-sm">
             <a
-              onClick={props.onClickPreviousPage}
-              className={`${COMMON_STYLES}${NON_ACTIVE_STYLES} cursor-pointer`}>
+              onClick={props.onClickNavigatePage.bind(
+                null,
+                props.currentPage - 1
+              )}
+              className={`${COMMON_STYLES}${NON_ACTIVE_STYLES} rounded-l-lg`}>
               <span className="sr-only">Previous</span>
               <ChevronLeft aria-hidden="true" className="h-5 w-5" />
             </a>
 
-            {[...new Array(pageCount)].map((_, i) => (
+            {[...new Array(props.pageCount)].map((_, i) => (
               <OrganisationSearchPaginationButton
+                key={i}
+                onClick={props.onClickNavigatePage.bind(null, i)}
                 currentPage={props.currentPage + 1}
                 page={i + 1}
               />
@@ -68,8 +73,11 @@ function OrganisationSearchPagination(
             <span className={`${COMMON_STYLES}${NON_ACTIVE_STYLES}`}>...</span>
 
             <a
-              onClick={props.onClickNextPage}
-              className={`${COMMON_STYLES}${NON_ACTIVE_STYLES} cursor-pointer`}>
+              onClick={props.onClickNavigatePage.bind(
+                null,
+                props.currentPage + 1
+              )}
+              className={`${COMMON_STYLES}${NON_ACTIVE_STYLES} rounded-r-lg`}>
               <span className="sr-only">Next</span>
               <ChevronRight aria-hidden="true" className="h-5 w-5" />
             </a>

@@ -1,6 +1,7 @@
 interface OrganisationSearchPaginationButtonProps {
   currentPage: number;
   page: number;
+  onClick: () => any;
 }
 
 export const COMMON_STYLES =
@@ -20,6 +21,7 @@ function OrganisationSearchPaginationButton(
   return (
     <>
       <a
+        onClick={props.onClick}
         aria-current={isActive ? 'page' : undefined}
         className={buttonClassName}>
         {props.page}
