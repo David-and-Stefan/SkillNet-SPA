@@ -58,8 +58,8 @@ export const router = createBrowserRouter(
 
 function App() {
   return (
-    <QueryClientProvider>
-      <Auth0Provider>
+    <Auth0Provider>
+      <QueryClientProvider>
         <ThemeProvider>
           <main className="w-screen text-black dark:text-dark-300 flex justify-center align-middle bg-dark-100 dark:bg-black">
             <Sidebar />
@@ -69,7 +69,7 @@ function App() {
             </div>
           </main>
         </ThemeProvider>
-      </Auth0Provider>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </Auth0Provider>
   );
 }

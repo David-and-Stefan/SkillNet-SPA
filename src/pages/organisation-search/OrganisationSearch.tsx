@@ -5,6 +5,9 @@ import { axiosInstance } from '../../components/axios-interceptor/AxiosIntercept
 import { buildUrl } from '../../utils/url';
 import OrganisationSearchCard from './components/organisation-search-card/OrganisationSearchCard';
 import OrganisationSearchInput from './components/organisation-search-input/OrganisationSearchInput';
+import OrganisationSearchPagination from './components/organisation-search-pagination/OrganisationSearchPagination';
+
+const PAGE_SIZE = 6;
 
 function OrganisationSearch() {
   const [page, setPage] = useState(0);
@@ -52,6 +55,31 @@ function OrganisationSearch() {
           </div>
         </section>
       )}
+      <section className="relative p-4">
+        <div className="flex flex-row justify-between bg-white dark:bg-dark-950 rounded-lg">
+          <div className="flex justify-between items-center w-full">
+            <OrganisationSearchInput />
+          </div>
+        </div>
+        <div className="pt-4">
+          <div className="flex items-center flex-wrap justify-between gap-5">
+            <OrganisationSearchCard />
+            <OrganisationSearchCard />
+            <OrganisationSearchCard />
+            <OrganisationSearchCard />
+          </div>
+        </div>
+        <div className="pt-4">
+          <OrganisationSearchPagination
+            onClickNextPage={() => {}}
+            onClickPreviousPage={() => {}}
+            onClickNavigatePage={(page: number) => {}}
+            pageSize={PAGE_SIZE}
+            currentPage={page}
+            resultCount={23}
+          />
+        </div>
+      </section>
     </>
   );
 }
